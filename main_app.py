@@ -3,11 +3,15 @@ import streamlit as st
 st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
+    page_title="Nova"
 )
 
 def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    try:
+        with open(file_name) as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    except FileNotFoundError:
+        st.error(f"CSS Datei nicht gefunden unter: {file_name}")
 
 local_css("assets/style.css")
 
